@@ -133,13 +133,13 @@ def _error(code, msg):
 
 
 async def generate_grok_backchodi(context: str = "", player_name: str = "") -> str:
-    """Generate backchodi using Grok AI"""
+    """Generate powerful, challenging backchodi using Grok AI"""
     if not GROK_CLIENT:
-        # Fallback to random if Grok unavailable
+        # Fallback to challenging backchodi
         fallback_starters = [
-            "Arre yaar, tumhara fashion sense itna outdated hai ki museum mein display kar dete hain!",
-            "Tumhari cooking skills dekh kar lagta hai khana bhi tumse door bhagta hai!",
-            "Tumhara sense of humor itna dry hai ki Sahara desert bhi paani maang raha hai!",
+            "Arre bhai, tumhara confidence dekh kar lagta hai ki main tumhe roast karne ki zaroorat hi nahi! Kya bologe ab?",
+            "Yaar tumhara style dekh kar lagta hai tumne fashion advice Google se li hai - galat search results mili! Ab defend karo!",
+            "Bhai tumhara sense of humor itna predictable hai ki main already jaanta hun tum kya jawab doge! Surprise me kar sakte ho?",
         ]
         return random.choice(fallback_starters)
 
@@ -148,23 +148,30 @@ async def generate_grok_backchodi(context: str = "", player_name: str = "") -> s
             [
                 (
                     "system",
-                    "You are a witty backchodi master who creates hilarious friendly roasts in Hinglish style.",
+                    "You are a savage backchodi champion who creates powerful, challenging roasts that demand clever responses. Your goal is to create backchodi that puts the opponent on the spot and forces them to think of a smart comeback.",
                 ),
                 (
                     "user",
-                    """Generate a witty, humorous backchodi (friendly roast) in Hindi-English mix style. 
-        
+                    """Generate a powerful, challenging backchodi (roast) in Hindi-English mix that DEMANDS a response from the opponent.
+
 Context: {context}
 Target: {player_name}
 
-Style guidelines:
-- Mix of Hindi and English (Hinglish)
-- Use popular slang like "arre", "yaar", "bhai"
-- Keep it light and funny, not offensive
-- Length: 15-80 characters
-- Be creative and original
+Requirements:
+- Create a CHALLENGING statement that requires a smart comeback
+- Mix Hindi and English naturally (Hinglish)
+- Use slang like "arre", "yaar", "bhai", "dekh", "lagta hai"
+- Make it witty but not offensive
+- Length: 25-100 characters
+- End with a challenge or question that demands response
+- Make opponent think hard for a good counter
 
-Generate only the backchodi message, nothing else.""",
+Examples of powerful backchodi:
+- "Arre bhai, tumhara confidence dekh kar lagta hai mirror se paise lete ho! Kya defense hai tumhara?"
+- "Yaar tumhara style dekh kar lagta hai tumne YouTube se sikha hai 'How to be cool in 5 minutes' - fail video! Ab batao kya khaas hai tumme?"
+- "Bhai tumhara attitude dekh kar lagta hai Netflix pe tumhara biopic aayega - 'How NOT to be awesome'! Counter kar sakte ho?"
+
+Generate only the challenging backchodi, nothing else.""",
                 ),
             ]
         )
@@ -172,7 +179,7 @@ Generate only the backchodi message, nothing else.""",
         chain = prompt_template | GROK_CLIENT | StrOutputParser()
         response = await chain.ainvoke(
             {
-                "context": context if context else "General backchodi battle",
+                "context": context if context else "Challenging backchodi battle",
                 "player_name": player_name if player_name else "opponent",
             }
         )
@@ -181,15 +188,15 @@ Generate only the backchodi message, nothing else.""",
     except Exception as e:
         print(f"Grok API error: {e}")
         fallback_starters = [
-            "Arre yaar, tumhara style dekh kar lagta hai fashion week se ban kar aaye ho!",
-            "Tumhara confidence level dekh kar lagta hai mirror bhi jhooth bol raha hai!",
-            "Bhai tumhara sense of humor itna dry hai ki desert bhi paani maang raha!",
+            "Arre bhai, tumhara confidence dekh kar lagta hai ki main tumhe roast karne ki zaroorat hi nahi! Kya bologe ab?",
+            "Yaar tumhara style dekh kar lagta hai tumne fashion advice Google se li hai - galat search results mili! Ab defend karo!",
+            "Bhai tumhara sense of humor itna predictable hai ki main already jaanta hun tum kya jawab doge! Surprise me kar sakte ho?",
         ]
         return random.choice(fallback_starters)
 
 
-async def score_message_with_grok(message: str, context: str = "") -> tuple[float, str]:
-    """Score a backchodi message using Grok AI and return score with feedback"""
+async def score_message_with_grok(message: str, context: str = "", ai_challenge: str = "") -> tuple[float, str]:
+    """Score a backchodi message using Grok AI based on how well it responds to the AI's challenge"""
     if not GROK_CLIENT:
         score = generate_score(message)
         response = await generate_grok_scoring_response(score, message)
@@ -200,27 +207,35 @@ async def score_message_with_grok(message: str, context: str = "") -> tuple[floa
             [
                 (
                     "system",
-                    "You are an expert judge of Hinglish backchodi battles. Rate messages fairly based on humor, creativity, and style.",
+                    "You are a savage backchodi battle judge who evaluates how well a player responds to challenges. Judge based on the quality of the comeback to the specific AI challenge presented.",
                 ),
                 (
                     "user",
-                    """Evaluate this backchodi message on a scale of 1-10 based on these criteria:
+                    """Evaluate this backchodi response on a scale of 1-10 based on how well it counters the AI's challenge:
 
-Message: "{message}"
+AI's Challenge: "{ai_challenge}"
+Player's Response: "{message}"
 Context: {context}
 
 Scoring criteria:
-1. Creativity and originality (1-3 points)
-2. Humor and wit (1-3 points)  
-3. Use of Hinglish/slang (1-2 points)
-4. Message flow and structure (1-2 points)
+1. RESPONSE RELEVANCE (1-3 points): How well does it address/counter the AI's specific challenge?
+2. COMEBACK QUALITY (1-3 points): How witty and clever is the counter-attack?
+3. HINGLISH STYLE (1-2 points): Natural use of Hindi-English mix and slang
+4. CREATIVITY & IMPACT (1-2 points): Originality and punch of the response
+
+Bonus considerations:
+- Did they turn the AI's attack back on them?
+- Did they cleverly deflect or counter-roast?
+- Is it a smart, unexpected response?
+- Does it show quick thinking?
 
 Provide:
 1. A numerical score (1.0-10.0)
-2. A brief feedback in Hinglish style (like "Waah bhai, solid comeback!" or "Thoda weak tha yaar!")
+2. A brief feedback in Hinglish explaining what worked/didn't work
 
 Format: SCORE|FEEDBACK
-Example: 7.5|Ekdum mast! Good use of slang! 🔥""",
+Example: 8.5|Epic counter bhai! Tumne AI ko hi roast kar diya! 🔥
+Example: 4.2|Weak response yaar, AI ka challenge properly address nahi kiya! 😅""",
                 ),
             ]
         )
@@ -229,6 +244,7 @@ Example: 7.5|Ekdum mast! Good use of slang! 🔥""",
         response = await chain.ainvoke(
             {
                 "message": message,
+                "ai_challenge": ai_challenge if ai_challenge else "General challenge",
                 "context": context if context else "Backchodi battle",
             }
         )
@@ -746,10 +762,15 @@ async def send_backchodi(
         player.messages.append(message)
 
         if session.mode == GameMode.SOLO:
-            # Score the current round
+            # Score the current round based on AI's challenge
             current_round_num = session.current_round
+            # Get the latest AI challenge (the one player is responding to)
+            ai_challenge = session.ai_messages[-1] if session.ai_messages else "General challenge"
+            
             score, response_text = await score_message_with_grok(
-                message, context=f"Solo battle round {current_round_num}"
+                message, 
+                context=f"Solo battle round {current_round_num}",
+                ai_challenge=ai_challenge
             )
             player.score += score
             session.current_round += 1
@@ -801,18 +822,24 @@ Thanks for playing! Start a new game anytime! 🎉"""
                 if session.current_round > session.max_rounds:
                     session.state = GameState.FINISHED
 
-                    # Score all messages
+                    # Score all messages with AI context
+                    ai_topic = session.ai_messages[0] if session.ai_messages else "General duel topic"
+                    
                     player1_scores = []
                     for msg in session.players[0].messages:
                         score, _ = await score_message_with_grok(
-                            msg, context=f"Duel evaluation - {session.players[0].name}"
+                            msg, 
+                            context=f"Duel evaluation - {session.players[0].name}",
+                            ai_challenge=f"Duel topic: {ai_topic}"
                         )
                         player1_scores.append(score)
 
                     player2_scores = []
                     for msg in session.players[1].messages:
                         score, _ = await score_message_with_grok(
-                            msg, context=f"Duel evaluation - {session.players[1].name}"
+                            msg, 
+                            context=f"Duel evaluation - {session.players[1].name}",
+                            ai_challenge=f"Duel topic: {ai_topic}"
                         )
                         player2_scores.append(score)
 
@@ -973,6 +1000,7 @@ async def test_grok_connection(
         test_score, test_feedback = await score_message_with_grok(
             "Arre yaar, tumhara style dekh kar lagta hai fashion week se ban kar aaye ho!",
             context="Test scoring",
+            ai_challenge=test_response
         )
 
         result = f"""✅ **Grok Integration Working!**
@@ -1049,24 +1077,30 @@ async def get_game_rules(
 
 **1. SOLO MODE:**
 • Battle against AI powered by Grok
-• AI starts with a creative backchodi
-• You respond with your counter
-• AI scores your response (1-10) with detailed feedback
-• 5 rounds total
+• AI creates CHALLENGING backchodi that demands response
+• You must cleverly counter the AI's specific challenge
+• AI judges how well you responded to its challenge (1-10)
+• 5 intense rounds total
 • Goal: Average 7+ for "Ultimate Backchod" status
 
 **2. DUEL MODE:**
 • Battle against a friend
-• AI provides the topic/starter
-• Both players exchange backchodi
-• AI judges each message after 5 rounds
-• Highest average score wins
+• AI provides challenging topic/starter
+• Both players exchange clever responses
+• AI judges responses based on challenge context
+• Highest average score wins after 5 rounds
 
-**🎯 SCORING CRITERIA (AI-Powered):**
-• Creativity and originality (1-3 points)
-• Humor and wit (1-3 points)
-• Use of Hinglish/slang (1-2 points)
-• Message flow and structure (1-2 points)
+**🎯 NEW SCORING CRITERIA (Challenge-Based):**
+• RESPONSE RELEVANCE (1-3 points): How well you address AI's challenge
+• COMEBACK QUALITY (1-3 points): Wit and cleverness of counter-attack  
+• HINGLISH STYLE (1-2 points): Natural Hindi-English mix usage
+• CREATIVITY & IMPACT (1-2 points): Originality and punch
+
+**💡 BONUS POINTS FOR:**
+• Turning AI's challenge back on them
+• Clever deflection or counter-roast
+• Unexpected, smart responses
+• Quick-thinking comebacks
 
 **📱 AVAILABLE TOOLS:**
 • `configure_grok_api` - Setup Grok API

@@ -119,41 +119,52 @@ To get more detailed error messages:
 ## How to Play Backchodi Battle
 
 ### Solo Mode
-1. Start a solo battle: AI will challenge you with a witty opener
-2. Respond with your best Hinglish comeback
-3. AI scores your response (1-10) with detailed feedback
-4. Battle continues for 5 rounds
+1. Start a solo battle: AI creates **CHALLENGING** backchodi that demands response
+2. You must cleverly counter the AI's specific challenge
+3. AI judges how well you responded to its challenge (1-10)
+4. Battle continues for 5 intense rounds
 5. Goal: Average 7+ for "Ultimate Backchod" status!
 
 ### Duel Mode
 1. Start a duel battle and share session ID with a friend
 2. Friend joins using the session ID
-3. AI provides battle topics and prompts
-4. Both players exchange backchodi messages
-5. AI judges all messages after 5 rounds
+3. AI provides challenging topics that demand clever responses
+4. Both players must address the challenges with wit and creativity
+5. AI judges responses based on challenge context after 5 rounds
 6. Highest average score wins the epic battle!
 
-### Pro Tips
-- Mix Hindi and English naturally (Hinglish style)
-- Use popular slang like "yaar", "bhai", "arre"
-- Reference popular culture and trends
-- Keep it light, funny, and creative
-- Timing matters - don't overthink it!
+### Pro Tips for Challenge-Response Battles
+- **Address the Challenge**: Always respond directly to what AI asks/challenges
+- **Turn it Around**: Try to flip the AI's challenge back on them
+- **Use Hinglish**: Mix Hindi and English naturally with slang like "yaar", "bhai", "arre"
+- **Be Clever**: Show quick thinking and unexpected responses
+- **Counter-Roast**: Don't just defend, attack back smartly
+- **Stay Relevant**: Your comeback should connect to the AI's specific challenge
+- **Cultural References**: Use popular culture and trends in your counters
+- **Timing matters**: Quick, witty responses score higher!
 
 ## 🤖 AI-Powered Features
 
 ### Grok-3-Beta Integration
-- **Dynamic Responses**: Never see the same AI comeback twice
-- **Contextual Scoring**: AI understands your message context for fair scoring
+- **Challenging AI**: Creates powerful backchodi that demand specific responses
+- **Challenge-Based Scoring**: AI judges how well you counter its specific challenges
+- **Dynamic Challenges**: Never see the same AI challenge twice
+- **Contextual Intelligence**: AI understands your response in context of its challenge
 - **Personalized Verdicts**: Custom game-ending announcements with your name
 - **Sports Commentary**: Epic winner announcements for duel battles
 - **Cultural Authenticity**: AI trained on Hinglish humor and Indian culture
 
-### Intelligent Scoring Criteria
-- **Creativity & Originality** (1-3 points): How unique and creative is your comeback?
-- **Humor & Wit** (1-3 points): Does it make people laugh?
-- **Hinglish Usage** (1-2 points): Natural mix of Hindi and English
-- **Flow & Structure** (1-2 points): Is it well-constructed and punchy?
+### New Challenge-Based Scoring
+- **Response Relevance** (1-3 points): How well you address AI's specific challenge
+- **Comeback Quality** (1-3 points): Wit and cleverness of your counter-attack
+- **Hinglish Style** (1-2 points): Natural Hindi-English mix and slang usage
+- **Creativity & Impact** (1-2 points): Originality and punch of response
+
+### Bonus Points For
+- **Turning Tables**: Flipping AI's challenge back on them
+- **Smart Deflection**: Cleverly avoiding and counter-roasting
+- **Quick Thinking**: Unexpected, intelligent responses
+- **Counter-Attack**: Not just defending but attacking back
 
 ### Fallback System
 - Server works even without Grok API
