@@ -746,8 +746,10 @@ async def send_backchodi(
         player.messages.append(message)
 
         if session.mode == GameMode.SOLO:
+            # Score the current round
+            current_round_num = session.current_round
             score, response_text = await score_message_with_grok(
-                message, context=f"Solo battle round {session.current_round}"
+                message, context=f"Solo battle round {current_round_num}"
             )
             player.score += score
             session.current_round += 1
@@ -759,9 +761,9 @@ async def send_backchodi(
                 )
                 session.ai_messages.append(ai_response)
 
-                result = f"""🎯 **Score:** {score:.1f}/10 - {response_text}
+                result = f"""🎯 **Round {current_round_num}/{session.max_rounds} Score:** {score:.1f}/10 - {response_text}
 **Total Score:** {player.score:.1f}
-**Round:** {session.current_round}/{session.max_rounds}
+**Next Round:** {session.current_round}/{session.max_rounds}
 
 🤖 **AI counter-attacks:** {ai_response}
 
@@ -772,8 +774,10 @@ Your turn again! 🔥"""
 
                 verdict = await generate_grok_game_verdict(final_score, player.name)
 
-                result = f"""🎮 **GAME FINISHED!**
-**Final Score:** {player.score:.1f}/{session.max_rounds * 10}
+                result = f"""🎯 **Round {current_round_num}/{session.max_rounds} Final Score:** {score:.1f}/10 - {response_text}
+
+🎮 **GAME FINISHED!**
+**Total Score:** {player.score:.1f}/{session.max_rounds * 10}
 **Average:** {final_score:.1f}/10
 
 {verdict}
@@ -852,15 +856,13 @@ Epic battle! 🔥🔥 Start a new game anytime! 🎉"""
                     waiting_msg = await generate_grok_waiting_message(
                         "duel battle waiting"
                     )
-                    result = f"""✅ **Message sent!** 
-**Round:** {session.current_round}/{session.max_rounds}
+                    result = f"""✅ **Round {session.current_round}/{session.max_rounds} Message sent!** 
 **Messages this round:** {current_round_messages}/2
 
 {waiting_msg} Waiting for {other_player.name if other_player and current_round_messages % 2 == 1 else 'next round'}!"""
             else:
                 waiting_msg = await generate_grok_waiting_message("duel battle waiting")
-                result = f"""✅ **Message sent!** 
-**Round:** {session.current_round}/{session.max_rounds}
+                result = f"""✅ **Round {session.current_round}/{session.max_rounds} Message sent!** 
 **Messages this round:** {current_round_messages}/2
 
 {waiting_msg} Waiting for {other_player.name if other_player and current_round_messages % 2 == 1 else 'next round'}!"""
@@ -1050,14 +1052,14 @@ async def get_game_rules(
 • AI starts with a creative backchodi
 • You respond with your counter
 • AI scores your response (1-10) with detailed feedback
-• 10 rounds total
+• 5 rounds total
 • Goal: Average 7+ for "Ultimate Backchod" status
 
 **2. DUEL MODE:**
 • Battle against a friend
 • AI provides the topic/starter
 • Both players exchange backchodi
-• AI judges each message after 10 rounds
+• AI judges each message after 5 rounds
 • Highest average score wins
 
 **🎯 SCORING CRITERIA (AI-Powered):**

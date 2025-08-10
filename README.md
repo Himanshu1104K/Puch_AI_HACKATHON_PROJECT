@@ -122,7 +122,7 @@ To get more detailed error messages:
 1. Start a solo battle: AI will challenge you with a witty opener
 2. Respond with your best Hinglish comeback
 3. AI scores your response (1-10) with detailed feedback
-4. Battle continues for 10 rounds
+4. Battle continues for 5 rounds
 5. Goal: Average 7+ for "Ultimate Backchod" status!
 
 ### Duel Mode
@@ -130,7 +130,7 @@ To get more detailed error messages:
 2. Friend joins using the session ID
 3. AI provides battle topics and prompts
 4. Both players exchange backchodi messages
-5. AI judges all messages after 10 rounds
+5. AI judges all messages after 5 rounds
 6. Highest average score wins the epic battle!
 
 ### Pro Tips
